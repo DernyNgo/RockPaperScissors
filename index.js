@@ -5,6 +5,19 @@ function getComputerChoice() {
 }
 // Write a function that plays a single round of Rock Paper Scissors.
 // The function should take two parameters: playerSelection and computerSelection.
+function firstRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return (`It's a tie, since you both chose ${playerSelection}`)
+    } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
+        return ("You won! Rock beats Scissors.");
+    } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
+        return ("You won! Paper beats Rock.");
+    } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
+        return ("You won! Scissors beat Paper.");
+    } else { 
+        return (`You lost! ${computerSelection} beats ${playerSelection}`);
+    }
+}
 
 // Return a string that declares the winner of the round like so: "You Lose! Paper beats Rock"
 
