@@ -12,25 +12,30 @@ function getComputerChoice() {
         return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return (`It's a tie, since you both chose ${playerSelection}`);
-    } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
+function playRound(playerSelection, computerSelection){
+    const playerSelectionString = playerSelection.toLowerCase();
+    const computerSelectionString = computerSelection.toLowerCase();
+
+    if (playerSelectionString !== 'rock' && playerSelectionString !== 'paper' && playerSelectionString !== 'scissors') {
+        return 'Invalid Input'
+    } else if (playerSelectionString === computerSelectionString) {
+        return (`It's a tie, since you both chose ${playerSelectionString}`);
+    } else if (playerSelectionString === 'rock' && computerSelectionString === 'scissors') {
         return ("You won! Rock beats Scissors.");
-    } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
+    } else if (playerSelectionString === 'paper' && computerSelectionString === 'rock') {
         return ("You won! Paper beats Rock.");
-    } else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
+    } else if (playerSelectionString === 'scissors' && computerSelectionString === 'paper') {
         return ("You won! Scissors beat Paper.");
     } else { 
-        return (`You lost! ${computerSelection} beats ${playerSelection}`);
+        return (`You lost! ${computerSelectionString} beats ${playerSelectionString}`);
     }
     
 }
 
 function game() {
     for (let i = 0; i < 5; i++) {
-      let playerSelection = prompt("Please enter either Rock, Paper, or Scissors!").toLowerCase();
-      let computerSelection = getComputerChoice().toLowerCase();
+      let playerSelection = prompt("Please enter either Rock, Paper, or Scissors!");
+      let computerSelection = getComputerChoice();
       console.log(playRound(playerSelection, computerSelection));
     }
 }
