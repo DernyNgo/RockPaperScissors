@@ -10,7 +10,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
-        return (`It's a tie, since you both chose ${playerSelection}`)
+        return (`It's a tie, since you both chose ${playerSelection}`);
     } else if (playerSelection === 'Rock' && computerSelection === 'Scissors') {
         return ("You won! Rock beats Scissors.");
     } else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
@@ -20,7 +20,12 @@ function playRound(playerSelection, computerSelection) {
     } else { 
         return (`You lost! ${computerSelection} beats ${playerSelection}`);
     }
+    
 }
+
+const playerSelection = prompt("Please enter either Rock, Paper, or Scissors!");
+const computerSelection = getComputerChoice();
+console.log(playRound(playerSelection, computerSelection));
 
 // Make the function's playerSelection parameter case-insensitive so useres can input Rock, ROCK, RoCK, etc.
 
@@ -33,11 +38,9 @@ let choices2 = ['ROCK', 'PAPER', 'SCISSORS'];
 
 for (let i = 0; i < 5; i++) {
     playRound();
-    console.log(playRound(playerSelection, computerSelection));
 }
 
 // Use console log to display the results of each round and the winner at the end
 
 // Use prompt() to get input from the user 
 
-prompt("Please enter either Rock, Paper, or Scissors to begin!");
