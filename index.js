@@ -1,41 +1,70 @@
-// begin with a function called getComputerChoice that will randomly return either 'Rock', 'Paper', or 'Scissors'
-// Write a function that plays a single round of Rock Paper Scissors.
-// The function should take two parameters: playerSelection and computerSelection.
-// Return a string that declares the winner of the round like so: "You Lose! Paper beats Rock."
-// Make the function's playerSelection parameter case-insensitive so useres can input Rock, ROCK, RoCK, etc.
-// Write a NEW function called game(). Call the playRound function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end
-// Use console log to display the results of each round and the winner at the end
-// Use prompt() to get input from the user 
+//establish player and computer scores to start at 0
+let playerScore = 0;
+let computerScore = 0;
 
+//establish choices within global scope
+const choices = ['rock', 'paper', 'scissors'];
+
+//make sure event listeners are being triggered via the html file (console logs confirm this)
+let rockButton = document.querySelector("#rock");
+rockButton.addEventListener("click", () => {
+playRound('rock', getComputerChoice());
+})
+
+let paperButton = document.querySelector("#paper");
+paperButton.addEventListener("click", () => {
+playRound('paper', getComputerChoice());
+})
+
+let scissorsButton = document.querySelector("#scissors");
+scissorsButton.addEventListener("click", () => {
+playRound('scissors', getComputerChoice());
+})
+
+//create function to generate random computer choices
 function getComputerChoice() {
-    const choices = ['rock', 'paper', 'scissors'];
-        return choices[Math.floor(Math.random() * choices.length)];
+  return choices[Math.floor(Math.random() * choices.length)]
 }
 
-function playRound(playerSelection, computerSelection){
-    const playerSelectionString = playerSelection.toLowerCase();
-    const computerSelectionString = computerSelection.toLowerCase();
+//create display of results via DOM methods
+let displayPlayerScore = document.createElement("h1");
+    displayPlayerScore.innerText = playerScore;
+    results.appendChild(displayPlayerScore);
 
-    if (playerSelectionString !== 'rock' && playerSelectionString !== 'paper' && playerSelectionString !== 'scissors') {
-        return 'Invalid Input'
-    } else if (playerSelectionString === computerSelectionString) {
-        return (`It's a tie, since you both chose ${playerSelectionString}`);
-    } else if (playerSelectionString === 'rock' && computerSelectionString === 'scissors') {
-        return ("You won! Rock beats Scissors.");
-    } else if (playerSelectionString === 'paper' && computerSelectionString === 'rock') {
-        return ("You won! Paper beats Rock.");
-    } else if (playerSelectionString === 'scissors' && computerSelectionString === 'paper') {
-        return ("You won! Scissors beat Paper.");
-    } else { 
-        return (`You lost! ${computerSelectionString} beats ${playerSelectionString}`);
+let displayComputerScore = document.createElement("h1");
+    displayComputerScore.innerText = computerScore;
+    results.appendChild(displayComputerScore);
+
+let finalResults = document.createElement("h1");
+    finalResults.innerText = "";
+    gameResults.appendChild(finalResults);
+  
+//insert game logic for player and computer selections, make sure wins add 1 point to winners' stored points, and behaves properly. also make sure the function stops if any player reaches 5 points
+function playRound(playerSelection, computerSelection) {
+  
+    if (playerSelection === computerSelection) {
+        test = `It\'s a tie, since you both chose ${playerSelection}.`
+    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        playerScore ++;
+        test = "You won! Rock beats Scissors."
+    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        playerScore ++;
+        test =  "You won! Paper beats Rock."
+    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        playerScore ++;
+        test = "You won! Scissors beat Paper."
+    } else {
+        computerScore ++;
+        test = `You lost! ${computerSelection} beats ${playerSelection}`;
     }
-    
+
+    if (playerScore >= 5) {
+        test = 'You won the game! Reload the page to play again.'
+    } else if (computerScore >= 5) 
+        test =  'You lost the game. Reload the page to play again.'
+
+    displayPlayerScore.innerText = playerScore;
+    displayComputerScore.innerText = computerScore;
+    finalResults.innerText = test;
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-      let playerSelection = prompt("Please enter either Rock, Paper, or Scissors!");
-      let computerSelection = getComputerChoice();
-      console.log(playRound(playerSelection, computerSelection));
-    }
-}
