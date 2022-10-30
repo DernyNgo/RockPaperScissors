@@ -38,33 +38,42 @@ let displayComputerScore = document.createElement("h1");
 let finalResults = document.createElement("h1");
     finalResults.innerText = "";
     gameResults.appendChild(finalResults);
+
+function returnResults(playerScore, computerScore, messageString) {
+        displayPlayerScore.innerText = playerScore;
+        displayComputerScore.innerText = computerScore;
+        finalResults.innerText = messageString;
+    }
   
 //insert game logic for player and computer selections, make sure wins add 1 point to winners' stored points, and behaves properly. also make sure the function stops if any player reaches 5 points
 function playRound(playerSelection, computerSelection) {
   
     if (playerSelection === computerSelection) {
-        test = `It\'s a tie, since you both chose ${playerSelection}.`
+        messageString = `It\'s a tie, since you both chose ${playerSelection}.`
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
         playerScore ++;
-        test = "You won! Rock beats Scissors."
+        messageString = "You won! Rock beats Scissors."
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
         playerScore ++;
-        test =  "You won! Paper beats Rock."
+        messageString =  "You won! Paper beats Rock."
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
         playerScore ++;
-        test = "You won! Scissors beat Paper."
+        messageString = "You won! Scissors beat Paper."
     } else {
         computerScore ++;
-        test = `You lost! ${computerSelection} beats ${playerSelection}`;
+        messageString = `You lost! ${computerSelection} beats ${playerSelection}`;
     }
 
     if (playerScore >= 5) {
-        test = 'You won the game! Reload the page to play again.'
-    } else if (computerScore >= 5) 
-        test =  'You lost the game. Reload the page to play again.'
-
-    displayPlayerScore.innerText = playerScore;
-    displayComputerScore.innerText = computerScore;
-    finalResults.innerText = test;
+        messageString = 'You won the game! Reload the page to play again.'
+        rockButton.disabled = true
+        paperButton.disabled = true
+        scissorsButton.disabled = true
+    } else if (computerScore >= 5) {
+        messageString =  'You lost the game. Reload the page to play again.'
+        rockButton.disabled = true
+        paperButton.disabled = true
+        scissorsButton.disabled = true
 }
-
+    returnResults(playerScore, computerScore, messageString);
+}
