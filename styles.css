@@ -1,0 +1,26 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 50px;
+  font-type: bold;
+  font-family: 'Calibri'
+}
+
+button {
+  color: white;
+  background-color: black;
+  font-size: 20px;
+  margin: 15px;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 10px;
+}
+
+#results {
+  gap: 50px;
+}
